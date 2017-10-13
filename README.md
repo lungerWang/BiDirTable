@@ -7,6 +7,6 @@ a resolution of binary direction scrollable table | 可双向滑动的表格
 
 ## Realization
 ![](https://raw.githubusercontent.com/lungerWang/BiDirTable/master/BiDirTable.png)
-上下滑动时：②的ListView与③的ScrollView联动
-左右滑动时：①的ScrollVie与③的ScrollView联动  
+上下滑动时：②的ListView与③的ScrollView联动；
+左右滑动时：①的ScrollVie与③的ScrollView联动  
 具体实现细节请见代码
