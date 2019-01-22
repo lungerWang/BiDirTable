@@ -12,7 +12,7 @@ import com.lunger.bidirtabledemo.R;
 
 
 /**
- * Created by Lunger on 7/13 0013 16:06
+ * Created by Allen on 2015/02/05 15:40
  */
 public class LvInfoAdapter extends BaseAdapter {
     private Context context;
@@ -72,18 +72,19 @@ public class LvInfoAdapter extends BaseAdapter {
 
         return convertView;
     }
+
+    class ViewHolder {
+        TextView tv_barcode;
+        TextView tv_category;
+        TextView tv_spec;
+        TextView tv_unit;
+        TextView tv_supplier;
+        TextView tv_sale_money;
+        TextView tv_income_money;
+        TextView tv_keep;
+        TextView tv_intime;
+        ImageView tv_online;
+
+    }
 }
 
-class ViewHolder {
-    TextView tv_barcode;
-    TextView tv_category;
-    TextView tv_spec;
-    TextView tv_unit;
-    TextView tv_supplier;
-    TextView tv_sale_money;
-    TextView tv_income_money;
-    TextView tv_keep;
-    TextView tv_intime;
-    ImageView tv_online;
-
-}

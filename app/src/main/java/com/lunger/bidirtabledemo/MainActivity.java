@@ -13,20 +13,15 @@ import com.lunger.bidirtabledemo.view.LinkedHorizontalScrollView;
 import com.lunger.bidirtabledemo.view.NoScrollHorizontalScrollView;
 
 /**
- * Created by Lunger on 2015/02/05 15:40
+ * Created by Allen on 2015/02/05 15:40
  */
 public class MainActivity extends AppCompatActivity {
 
-    private NoScrollHorizontalScrollView mGoodsNameSV;//不可滑动的顶部右侧的ScrollView
-    private LinkedHorizontalScrollView mInfoContainer;//底部右侧的ScrollView
-    private ListView mListViewName;//底部左侧的ListView
-    private ListView mListViewInfo;//底部右侧的ListView
+    private ListView mListViewName; // 底部左侧的ListView
+    private ListView mListViewInfo; // 底部右侧的ListView
 
     boolean isLeftListEnabled = false;
     boolean isRightListEnabled = false;
-
-    private LvNameAdapter mLvNormalNameAdapter;
-    private LvInfoAdapter mLvNormalInfoAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,44 +33,40 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initView() {
-        mGoodsNameSV = (NoScrollHorizontalScrollView)findViewById(R.id.sv_title);
-        mInfoContainer = (LinkedHorizontalScrollView)findViewById(R.id.sv_good_detail);
+        // 不可滑动的顶部右侧的ScrollView
+        NoScrollHorizontalScrollView goodsNameSV = (NoScrollHorizontalScrollView) findViewById(R.id.sv_title);
+        // 底部右侧的ScrollView
+        LinkedHorizontalScrollView infoContainer = (LinkedHorizontalScrollView) findViewById(R.id.sv_good_detail);
         mListViewName = (ListView) findViewById(R.id.lv_goods_name);
-        mListViewInfo = (ListView)findViewById(R.id.lv_good_info);
-        //联动控件
-        combination(mListViewName, mListViewInfo, mGoodsNameSV, mInfoContainer);
+        mListViewInfo = (ListView) findViewById(R.id.lv_good_info);
+        // 联动控件
+        combination(mListViewName, mListViewInfo, goodsNameSV, infoContainer);
     }
 
     private void initAdapter() {
-        mLvNormalNameAdapter = new LvNameAdapter(this);
-        mLvNormalInfoAdapter = new LvInfoAdapter(this);
-        mListViewName.setAdapter(mLvNormalNameAdapter);
-        mListViewInfo.setAdapter(mLvNormalInfoAdapter);
+        mListViewName.setAdapter(new LvNameAdapter(this));
+        mListViewInfo.setAdapter(new LvInfoAdapter(this));
     }
 
     private void combination(final ListView lvName, final ListView lvDetail, final HorizontalScrollView title, LinkedHorizontalScrollView content) {
-        /**
-         * 左右滑动同步
-         */
+        // 左右滑动同步
         content.setMyScrollChangeListener(new LinkedHorizontalScrollView.LinkScrollChangeListener() {
             @Override
-            public void onscroll(LinkedHorizontalScrollView view, int x, int y, int oldx, int oldy) {
+            public void onScroll(LinkedHorizontalScrollView view, int x, int y, int oldx, int oldy) {
                 title.scrollTo(x, y);
             }
         });
 
-        /**
-         * 上下滑动同步
-         */
+        // 上下滑动同步
         // 禁止快速滑动
         lvName.setOverScrollMode(ListView.OVER_SCROLL_NEVER);
         lvDetail.setOverScrollMode(ListView.OVER_SCROLL_NEVER);
-        //左侧ListView滚动时，控制右侧ListView滚动
+        // 左侧ListView滚动时，控制右侧ListView滚动
         lvName.setOnScrollListener(new AbsListView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-                //这两个enable标志位是为了避免死循环
+                // 这两个enable标志位是为了避免死循环
                 if (scrollState == SCROLL_STATE_TOUCH_SCROLL) {
                     isRightListEnabled = false;
                     isLeftListEnabled = true;
@@ -94,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //右侧ListView滚动时，控制左侧ListView滚动
+        // 右侧ListView滚动时，控制左侧ListView滚动
         lvDetail.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {

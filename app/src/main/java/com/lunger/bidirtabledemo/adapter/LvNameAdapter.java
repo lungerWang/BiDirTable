@@ -11,13 +11,13 @@ import com.lunger.bidirtabledemo.R;
 
 
 /**
- * Created by Lunger on 7/13 0013 16:05
+ * Created by Allen on 2015/02/05 15:45
  */
 public class LvNameAdapter extends BaseAdapter {
-    private Context context;
+    private Context mContext;
 
     public LvNameAdapter(Context context) {
-        this.context = context;
+        this.mContext = context;
     }
 
     @Override
@@ -40,16 +40,16 @@ public class LvNameAdapter extends BaseAdapter {
         ViewHolder holder;
         if(convertView == null){
             holder = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_lv_good_name, null);
-            holder.tv_goodname = (TextView) convertView.findViewById(R.id.tv_name);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_lv_good_name, null);
+            holder.tv_good_name = (TextView) convertView.findViewById(R.id.tv_name);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.tv_goodname.setText("iPone" + (position+4) + "s");
+        holder.tv_good_name.setText(String.format(mContext.getString(R.string.phone_name), position + 4));
         return convertView;
     }
     class ViewHolder{
-        TextView tv_goodname;
+        TextView tv_good_name;
     }
 }

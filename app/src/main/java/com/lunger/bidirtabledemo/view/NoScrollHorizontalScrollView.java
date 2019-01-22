@@ -6,9 +6,11 @@ import android.view.MotionEvent;
 import android.widget.HorizontalScrollView;
 
 /**
- * Created by Lunger on 2015/02/05 15:40
+ * Created by Allen on 2015/02/05 15:43
+ * 不可滑动的水平ScrollView
  */
 public class NoScrollHorizontalScrollView extends HorizontalScrollView {
+
     public NoScrollHorizontalScrollView(Context context) {
         super(context);
     }
